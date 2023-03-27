@@ -24,6 +24,13 @@ public class EmployeeServiceImplementation implements EmployeeService {
     }
 
     @Override
+    public String updateEmployee(int id, String newName) {
+        Employee employee = employeeRepository.getReferenceById(id);
+        employee.setName(newName);
+        return employee.getName();
+    }
+
+    @Override
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
     }

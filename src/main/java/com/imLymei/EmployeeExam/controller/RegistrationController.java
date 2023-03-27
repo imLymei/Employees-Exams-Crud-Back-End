@@ -28,6 +28,9 @@ public class RegistrationController {
         return registrationService.getAllRegistrations();
     }
 
+    @DeleteMapping("/delete/{id}")
+    public void deleteRegistration(@PathVariable int id){registrationService.deleteRegistration(id);}
+
     @GetMapping(value = "/getReport/{startDate}/{finalDate}")
     public List<Registration> getAllBetween(@PathVariable String startDate, @PathVariable String finalDate) throws ParseException {
         Date realStartDate = new SimpleDateFormat("dd-MM-yyyy").parse(startDate);

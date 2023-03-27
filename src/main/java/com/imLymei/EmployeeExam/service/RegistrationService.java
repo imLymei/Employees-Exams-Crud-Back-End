@@ -9,5 +9,6 @@ public interface RegistrationService {
     public String saveRegistration(Registration registration);
     public List<Registration> getAllRegistrations();
     public long deleteByEmployeeId(int id);
+    public void deleteRegistration(int id);
     public List<Registration> getAllBetween(Date startDate, Date finalDate);
 }

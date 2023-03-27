@@ -36,6 +36,11 @@ public class RegistrationServiceImplementation implements RegistrationService {
     }
 
     @Override
+    public void deleteRegistration(int id) {
+        registrationRepository.deleteById(id);
+    }
+
+    @Override
     public List<Registration> getAllBetween(Date startDate, Date finalDate) {
         return registrationRepository.findAllByDateBetween(startDate,finalDate);
     }

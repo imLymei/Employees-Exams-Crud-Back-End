@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface EmployeeService {
     public Employee saveEmployee(Employee employee);
+    public String updateEmployee(int id, String newName);
     public List<Employee> getAllEmployees();
     public void deleteEmployee(int id);
 }

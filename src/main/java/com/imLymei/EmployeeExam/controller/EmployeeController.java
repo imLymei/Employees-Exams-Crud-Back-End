@@ -22,6 +22,11 @@ public class EmployeeController {
         return "New employee added";
     }
 
+    @PutMapping("/update")
+    public String update(@RequestBody Employee employee){
+        return employeeService.updateEmployee(employee.getId(),employee.getName());
+    }
+
     @GetMapping("/getAll")
     public List<Employee> getAllEmployees(){return employeeService.getAllEmployees();}
 
