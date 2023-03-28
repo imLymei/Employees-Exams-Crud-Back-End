@@ -29,8 +29,16 @@ public class RegistrationServiceImplementation implements RegistrationService {
         List<Registration> amount = registrationRepository.findAllByExamIdAndEmployeeIdAndDate(registration.getExamId(),registration.getEmployeeId(),registration.getDate());
         Response response = new Response("error/Encontramos um registro semelhante");
         if (amount.size() == 0){
-            registrationRepository.save(registration);
-            response.setMessage("success/Novo registro adicionado");
+            if (examRepository.existsById(registration.getExamId())) {
+                if (employeeRepository.existsById(registration.getEmployeeId())){
+                    registrationRepository.save(registration);
+                    response.setMessage("success/Novo registro adicionado");
+                } else {
+                    response.setMessage("error/Não encontramos nenhum funcionário com esse ID");
+                }
+            } else {
+                response.setMessage("error/Não encontramos nenhum exame com esse ID");
+            }
         }
         return response;
     }
@@ -47,10 +55,10 @@ public class RegistrationServiceImplementation implements RegistrationService {
                         oldRegistration.setEmployeeId(registration.getEmployeeId());
                         oldRegistration.setExamId(registration.getExamId());
                         response.setMessage("success/Registro Atualizado");
-                    }else {
+                    } else {
                         response.setMessage("error/Não encontramos nenhum funcionário com esse ID");
                     }
-                }else {
+                } else {
                     response.setMessage("error/Não encontramos nenhum exame com esse ID");
                 }
             } else {
