@@ -1,6 +1,7 @@
 package com.imLymei.EmployeeExam.controller;
 
 import com.imLymei.EmployeeExam.model.Registration;
+import com.imLymei.EmployeeExam.model.Response;
 import com.imLymei.EmployeeExam.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +20,13 @@ public class RegistrationController {
     private RegistrationService registrationService;
 
     @PostMapping("/add")
-    public String add(@RequestBody Registration registration){
+    public Response add(@RequestBody Registration registration){
         return registrationService.saveRegistration(registration);
+    }
+
+    @PutMapping("/update")
+    public Response update(@RequestBody Registration registration){
+        return registrationService.updateRegistration(registration);
     }
 
     @GetMapping("/getAll")
@@ -33,8 +39,8 @@ public class RegistrationController {
 
     @GetMapping(value = "/getReport/{startDate}/{finalDate}")
     public List<Registration> getAllBetween(@PathVariable String startDate, @PathVariable String finalDate) throws ParseException {
-        Date realStartDate = new SimpleDateFormat("dd-MM-yyyy").parse(startDate);
-        Date realFinalDate = new SimpleDateFormat("dd-MM-yyyy").parse(finalDate);
+        Date realStartDate = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
+        Date realFinalDate = new SimpleDateFormat("yyyy-MM-dd").parse(finalDate);
         return registrationService.getAllBetween(realStartDate,realFinalDate);
     }
 }

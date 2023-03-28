@@ -1,6 +1,7 @@
 package com.imLymei.EmployeeExam.controller;
 
 import com.imLymei.EmployeeExam.model.Employee;
+import com.imLymei.EmployeeExam.model.Response;
 import com.imLymei.EmployeeExam.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
@@ -23,7 +24,7 @@ public class EmployeeController {
     }
 
     @PutMapping("/update")
-    public String update(@RequestBody Employee employee){
+    public Response update(@RequestBody Employee employee){
         return employeeService.updateEmployee(employee.getId(),employee.getName());
     }
 
